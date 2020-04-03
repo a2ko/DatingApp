@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../_services/Auth.service';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertifyService } from '../_services/alertify.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -13,27 +13,34 @@ export class NavComponent implements OnInit {
   @Input() titleValue: any;
   model: any = {};
   jwtHelper = new JwtHelperService();
-  constructor(public authService: AuthService, private alertify: AlertifyService) { }
+  constructor(
+    public authService: AuthService,
+    private alertify: AlertifyService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  login() {
+    this.authService.login(this.model).subscribe(
+      next => {
+        this.alertify.success('welcome');
+      },
+      error => {
+        this.alertify.error(error);
+      }, () => {
+        this.router.navigate(['/membars']);
+      }
+    );
   }
 
-  login(){
-this.authService.login(this.model).subscribe(next => {
-  this.alertify.success('welcome');
-
-}, error => {
- this.alertify.error(error);
-});
+  loggedIn() {
+    return this.authService.loggedIN();
   }
 
-  loggedIn(){
-  return this.authService.loggedIN();
-  }
-
-  logout(){
+  logout() {
     localStorage.removeItem('token');
-    this.alertify.message('logged out')
+    this.alertify.message('logged out');
+    this.router.navigate(['/']);
   }
-
 }
