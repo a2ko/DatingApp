@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { Server } from 'http';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
