@@ -19,10 +19,10 @@ export class AuthGuard implements CanActivate {
     private alertify: AlertifyService
   ) {}
   canActivate(): boolean {
-    if( this.authService.loggedIN()){
+    if (this.authService.loggedIN()){
       return true;
     }
-    this.alertify.error('Not Allow TO Enter Here!!')
+    this.alertify.error('Not Allow TO Enter Here!!');
     return false;
   }
 }
