@@ -22,6 +22,9 @@ import { MembarCardComponent } from './membars/membar-card/membar-card.component
 import { MembarDetailComponent } from './membars/membar-detail/membar-detail.component';
 import { MemberDetailResolver } from './_resolves/membar-detail.resolver';
 import { MemberListResolver } from './_resolves/membar-list.resolver';
+import { MembarEditComponent } from './membars/membar-edit/membar-edit.component';
+import { MemberEditResolver } from './_resolves/membar-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter(){
    return localStorage.getItem('token');
@@ -44,7 +47,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
       ListsComponent,
       MessagesComponent,
       MembarCardComponent,
-      MembarDetailComponent
+      MembarDetailComponent,
+      MembarEditComponent
      ],
    imports: [
       BrowserModule,
@@ -68,6 +72,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
       ErrorInterceptorProvider,
       MemberDetailResolver,
       MemberListResolver,
+      MemberEditResolver,
+      PreventUnsavedChanges,
       {provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig}
    ],
    bootstrap: [
